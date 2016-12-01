@@ -1,9 +1,9 @@
 {
   "name": "collegeman/aaroncollegeman-www",
   "license": "MIT",
-  "version": "1.0.6",
-  "description": "A workbench for building WordPress themes and plugins, based on Bedrock.",
-  "homepage": "https://github.com/withfatpanda/workbench-wordpress",
+  "version": "1.0.0",
+  "description": "The WordPress codebase behind ",
+  "homepage": "https://github.com/collegeman/aaroncollegeman-www",
   "authors": [
     {
       "name": "Aaron Collegeman",
