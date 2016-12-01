@@ -1,0 +1,43 @@
+<?php
+namespace @@PLUGIN_NAMESPACE@@;
+
+use Illuminate\Filesystem\Filesystem;
+
+/*
+This special autoloader stands in for the real deal until the
+first time Composer is initialized for this project. Until then,
+basically we just crawl everything in src/*, we look up all the
+PHP files, we generate a classmap style loader, and then attach
+that loader to the SPI interface.
+*/
+spl_autoload_register(function($name) {
+
+	$src = realpath(__DIR__.'/../src');
+	$fs = new Filesystem;
+	$files = $fs->glob($src.'/**/*.php');
+	
+	static $classmap;
+
+	// build the classmap
+	if ($classmap === null) {
+		$classmap = [];
+		foreach($files as $file) {
+			$contents = $fs->get($file);
+			$namespace = '';
+			if (preg_match('/namespace\s+(.*?);/i', $contents, $matches)) {
+				$namespace = $matches[1];
+			}
+			if (preg_match_all('/class\s+([\w\_]+).*?{/i', $contents, $matches)) {
+				foreach($matches[1] as $className) {
+					$classmap["{$namespace}\\{$className}"] = $file;
+				}
+			}
+		}
+	}
+
+	// if we found a match, load it
+	if (!empty($classmap[$name])) {
+		require_once $classmap[$name];
+	}
+	
+});

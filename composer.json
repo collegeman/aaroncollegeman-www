@@ -1,0 +1,67 @@
+{
+  "name": "collegeman/aaroncollegeman-www",
+  "license": "MIT",
+  "version": "1.0.6",
+  "description": "A workbench for building WordPress themes and plugins, based on Bedrock.",
+  "homepage": "https://github.com/withfatpanda/workbench-wordpress",
+  "authors": [
+    {
+      "name": "Aaron Collegeman",
+      "email": "aaroncollegeman@gmail.com",
+      "homepage": "https://aaroncollegeman.com"
+    }
+  ],
+  "keywords": [
+    "bedrock", "roots", "wordpress", "stack", "composer", "vagrant", "wp", "workbench", "plugins", "themes"
+  ],
+  "support": {
+    "issues": "https://github.com/withfatpanda/workbench-wordpress/issues"
+  },
+  "config": {
+    "preferred-install": "dist"
+  },
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://wpackagist.org"
+    }
+  ],
+  "require": {
+    "php": ">=5.6.4",
+    "composer/installers": "~1.0.12",
+    "vlucas/phpdotenv": "^2.0.1",
+    "johnpbloch/wordpress": "4.6.1",
+    "oscarotero/env": "^1.0",
+    "roots/wp-password-bcrypt": "1.0.0",
+    "wp-cli/php-cli-tools": "~0.11",
+    "mockery/mockery": "~0.9",
+    "withfatpanda/illuminate-wordpress": "~1.1",
+    "withfatpanda/auth-plugin-wordpress": "^1.0"
+  },
+  "require-dev": {
+    "squizlabs/php_codesniffer": "^2.5.1",
+    "wp-api/basic-auth": "dev-master",
+    "franzl/studio": "~0.11"
+  },
+  "autoload": {
+    "psr-4": {
+      "FatPanda\\WordPress\\": "lib/src/"
+    }
+  },
+  "extra": {
+    "installer-paths": {
+      "web/app/mu-plugins/{$name}/": ["type:wordpress-muplugin"],
+      "web/app/plugins/{$name}/": ["type:wordpress-plugin"],
+      "web/app/themes/{$name}/": ["type:wordpress-theme"]
+    },
+    "wordpress-install-dir": "web/wp"
+  },
+  "scripts": {
+    "post-create-project-cmd": [
+      "FatPanda\\WordPress\\Workbench::onPostCreateProject"
+    ],
+    "test": [
+      "vendor/bin/phpcs --ignore=web/wp/,vendor/ -n -s ."
+    ]
+  }
+}
