@@ -21,8 +21,7 @@ sql-dump-*.sql
 
 # Vendor (e.g. Composer)
 composer.lock
-vendor/*
-!vendor/.gitkeep
+/vendor
 
 # Node Package Manager
 node_modules
