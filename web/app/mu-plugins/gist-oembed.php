@@ -145,7 +145,7 @@ class gist {
 			return $noscript;
 		}else{
 			return sprintf(
-				'<div class="oembed-gist"><script src="%s"></script><noscript>%s</noscript></div>',
+				'<div class="oembed-gist" style="margin-bottom=30px;"><script src="%s"></script><noscript>%s</noscript></div>',
 				$url,
 				$noscript
 			);
